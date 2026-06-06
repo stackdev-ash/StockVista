@@ -2,14 +2,10 @@
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import InputField from "@/components/forms/InputField";
-import SelectField from "@/components/forms/SelectField";
-import {
-  INVESTMENT_GOALS,
-  PREFERRED_INDUSTRIES,
-  RISK_TOLERANCE_OPTIONS,
-} from "../../../lib/constants";
 import FooterLink from "@/components/forms/FooterLink";
+import { signIn } from "next-auth/react";
 import { signUpWithEmail } from "../../../lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -19,27 +15,51 @@ const SignUp = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors, isSubmitting },
   } = useForm<SignUpFormData>({
     defaultValues: {
       fullName: "",
       email: "",
       password: "",
-      investmentGoals: "Growth",
-      riskTolerance: "Medium",
-      preferredIndustry: "Technology",
     },
     mode: "onBlur",
   });
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      const result = await signUpWithEmail(data);
-      if (result.success) {
-        toast.success("Account created successfully");
-        router.push("/sign-in");
+      if (data.password !== data.confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
       }
+      const payload = {
+        ...data,
+        fullName: data.fullName.trim(),
+        email: data.email.trim().toLowerCase(),
+      };
+
+      const result = await signUpWithEmail(payload);
+
+      if (!result.success) {
+        toast.error(result.error || "Failed to create account");
+        return;
+      }
+
+      const loginResult = await signIn("credentials", {
+        email: payload.email,
+        password: payload.password,
+        redirect: false,
+      });
+
+      if (loginResult?.error) {
+        toast.error("Account created but login failed");
+        router.push("/sign-in");
+        return;
+      }
+
+      toast.success("Account created successfully");
+
+      router.push("/");
+      router.refresh();
     } catch (e) {
       toast.error("Sign up failed", {
         description:
@@ -50,21 +70,25 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="auth-form-card z-10">
-        <h1 className="form-title">Sign Up & Personalize</h1>
+      <div className="auth-form-card signup-form-card z-10">
+        <h1 className="form-title">Create Account</h1>
 
-        <p className="form-subtitle">
-          Start your investing journey with StockVista.
-        </p>
+        <p className="signup-subtitle">Start your investing journey with StockVista.</p>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
           <InputField
             name="fullName"
             label="Full Name"
             placeholder="John Doe"
             register={register}
             error={errors.fullName}
-            validation={{ required: "Full name is required", minLength: 2 }}
+            validation={{
+              required: "Full name is required",
+              minLength: {
+                value: 2,
+                message: "Name must be at least 2 characters",
+              },
+            }}
           />
 
           <InputField
@@ -74,12 +98,11 @@ const SignUp = () => {
             register={register}
             error={errors.email}
             validation={{
-              required: "Email name is required",
+              required: "Email is required",
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Enter a valid email address",
               },
-              message: "Email address is required",
             }}
           />
 
@@ -90,37 +113,29 @@ const SignUp = () => {
             type="password"
             register={register}
             error={errors.password}
-            validation={{ required: "Password is required", minLength: 8 }}
+            validation={{
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            }}
           />
 
-          <SelectField
-            name="investmentGoals"
-            label="Investment Goals"
-            placeholder="Select your investment goal"
-            options={INVESTMENT_GOALS}
-            control={control}
-            error={errors.investmentGoals}
-            required
-          />
-
-          <SelectField
-            name="riskTolerance"
-            label="Risk Tolerance"
-            placeholder="Select your risk level"
-            options={RISK_TOLERANCE_OPTIONS}
-            control={control}
-            error={errors.riskTolerance}
-            required
-          />
-
-          <SelectField
-            name="preferredIndustry"
-            label="Preferred Industry"
-            placeholder="Select your preferred industry"
-            options={PREFERRED_INDUSTRIES}
-            control={control}
-            error={errors.preferredIndustry}
-            required
+          <InputField
+            name="confirmPassword"
+            label="Confirm Password"
+            placeholder="Confirm your password"
+            type="password"
+            register={register}
+            error={errors.confirmPassword}
+            validation={{
+              required: "Please confirm your password",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            }}
           />
 
           <Button
@@ -128,7 +143,10 @@ const SignUp = () => {
             disabled={isSubmitting}
             className="cyan-btn w-full mt-5"
           >
-            {isSubmitting ? "Creating Account" : "Start Your Investing Journey"}
+            <span className="flex items-center justify-center gap-2">
+              {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
+              {isSubmitting ? "Creating Account..." : "Get Started"}
+            </span>
           </Button>
 
           <FooterLink
