@@ -3,12 +3,7 @@ import { auth } from "../../lib/nextauth/auth";
 import { redirect } from "next/navigation";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-  console.time("auth");
-
   const session = await auth();
-
-  console.timeEnd("auth");
-
   if (!session?.user) {
     redirect("/sign-in");
   }
