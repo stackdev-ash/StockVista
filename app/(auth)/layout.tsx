@@ -11,10 +11,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="auth-layout">
       <section className="auth-left-section relative">
-        <div className="absolute left-20 top-1/2 -translate-y-1/2 h-125 w-125 rounded-full bg-blue-500/10 blur-[150px]" />
-
-        <div className="absolute bottom-20 left-40 h-75 w-75 rounded-full bg-emerald-500/10 blur-[120px]" />
-
+        <div className="hidden lg:block absolute left-20 top-1/2 -translate-y-1/2 h-125 w-125 rounded-full bg-blue-500/10 blur-[150px]" />
+        <div className="hidden lg:block absolute bottom-20 left-40 h-75 w-75 rounded-full bg-emerald-500/10 blur-[120px]" />
         <Link href="/" className="auth-logo">
           <div className="flex items-center gap-2  ">
             <Image
@@ -28,10 +26,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           </div>
         </Link>
 
-        <div className="relative z-10 max-w-2xl mt-10">
-          <div
-            className="inline-flex items-center gap-1 mb-3 px-3 py-2 rounded-full border border-cyan-500/15 bg-cyan-300/5 text-cyan-300/80 text-sm font-medium"
-          >
+        <div className="relative z-10 w-full max-w-2xl mt-8 lg:mt-10">
+          <div className="inline-flex items-center gap-1 mb-3 px-3 py-2 rounded-full border border-cyan-500/15 bg-cyan-300/5 text-cyan-300/80 text-sm font-medium">
             Real-Time Market Intelligence
           </div>
 
@@ -52,19 +48,25 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <div className="auth-glass-card market-card">
               <p className="text-sm text-gray-400">AAPL</p>
 
-              <h3 className="text-white text-xl font-bold">+3.42%</h3>
+              <h3 className="text-white text-lg sm:text-xl font-bold">
+                +3.42%
+              </h3>
             </div>
 
             <div className="auth-glass-card market-card">
               <p className="text-sm text-gray-400">NVDA</p>
 
-              <h3 className="text-emerald-400 text-xl font-bold">+5.71%</h3>
+              <h3 className="text-emerald-400 text-lg sm:text-xl font-bold">
+                +5.71%
+              </h3>
             </div>
 
             <div className="auth-glass-card market-card">
               <p className="text-sm text-gray-400">MSFT</p>
 
-              <h3 className="text-blue-400 text-xl font-bold">+2.18%</h3>
+              <h3 className="text-blue-400 text-lg sm:text-xl font-bold">
+                +2.18%
+              </h3>
             </div>
           </div>
         </div>
