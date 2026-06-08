@@ -1,43 +1,53 @@
-'use client'
+"use client";
 
-import {NAV_ITEMS} from "@/lib/constants";
+import { NAV_ITEMS } from "@/lib/constants";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import SearchCommand from "@/components/SearchCommand";
 
+const NavItems = ({
+  initialStocks,
+}: {
+  initialStocks: StockWithWatchlistStatus[];
+}) => {
+  const pathname: string = usePathname();
 
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === "/";
 
-const NavItems = ({initialStocks}: { initialStocks: StockWithWatchlistStatus[]}) => {
-    const pathname:string = usePathname()
+    return pathname.startsWith(path);
+  };
 
-    const isActive = (path: string) => {
-        if (path === '/') return pathname === '/';
+  return (
+    <ul className="flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium">
+      {NAV_ITEMS.map(({ href, label }) => {
+        if (href === "/search")
+          return (
+            <li key="search-trigger">
+              <SearchCommand
+                renderAs="text"
+                label="Search"
+                initialStocks={initialStocks}
+              />
+            </li>
+          );
 
-        return pathname.startsWith(path);
-    }
-
-    return (
-        <ul className="flex flex-col sm:flex-row p-2 gap-3 sm:gap-10 font-medium">
-            {NAV_ITEMS.map(({ href, label }) => {
-                if(href === '/search') return (
-                    <li key="search-trigger">
-                        <SearchCommand
-                            renderAs="text"
-                            label="Search"
-                            initialStocks={initialStocks}
-                        />
-                    </li>
-                )
-
-                return <li key={href}>
-                    <Link href={href} className={`hover:text-yellow-500 transition-colors ${
-                        isActive(href) ? 'text-gray-100' : ''
-                    }`}>
-                        {label}
-                    </Link>
-                </li>
-            })}
-        </ul>
-    )
-}
-export default NavItems
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              className={`relative transition-all duration-200 ${
+                isActive(href)
+                  ? "text-cyan-400 font-semibold"
+                  : "text-slate-400 hover:text-cyan-300"
+              }`}
+            >
+              {label}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+export default NavItems;
