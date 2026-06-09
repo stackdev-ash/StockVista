@@ -16,6 +16,7 @@ const Header = async ({ user }: { user: User }) => {
             alt="StockVista logo"
             width={140}
             height={32}
+            priority
             className="h-8 w-auto cursor-pointer"
           />
 

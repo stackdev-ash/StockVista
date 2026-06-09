@@ -8,7 +8,6 @@ export default function Footer() {
       <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
               <Image
@@ -72,7 +71,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-4">
               <a
-                href="YOUR_LINKEDIN_URL"
+                href="https://www.linkedin.com/in/ashish-cse/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-cyan-400 transition"
@@ -81,7 +80,7 @@ export default function Footer() {
               </a>
 
               <a
-                href="YOUR_GITHUB_URL"
+                href="https://github.com/stackdev-ash"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-cyan-400 transition"
