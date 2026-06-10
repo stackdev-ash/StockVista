@@ -11,8 +11,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="auth-layout">
       <section className="auth-left-section relative">
-        <div className="hidden lg:block absolute left-20 top-1/2 -translate-y-1/2 h-125 w-125 rounded-full bg-blue-500/10 blur-[150px]" />
-        <div className="hidden lg:block absolute bottom-20 left-40 h-75 w-75 rounded-full bg-emerald-500/10 blur-[120px]" />
+        <div className="hidden lg:block absolute left-20 top-1/2 -translate-y-1/2 h-125 w-125 rounded-full bg-white/3 blur-[180px]" />
+        <div className="hidden lg:block absolute bottom-20 left-40 h-75 w-75 rounded-full bg-white/2 blur-[140px]" />
         <Link href="/" className="auth-logo">
           <div className="flex items-center gap-2  ">
             <Image
@@ -27,7 +27,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         </Link>
 
         <div className="relative z-10 w-full max-w-2xl mt-8 lg:mt-10">
-          <div className="inline-flex items-center gap-1 mb-3 px-3 py-2 rounded-full border border-cyan-500/15 bg-cyan-300/5 text-cyan-300/80 text-sm font-medium">
+          <div className="inline-flex items-center gap-1 mb-3 px-3 py-2 rounded-full border border-white/10 bg-white/3 text-gray-300 text-sm font-medium backdrop-blur-md">
             Real-Time Market Intelligence
           </div>
 
@@ -56,7 +56,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <div className="auth-glass-card market-card">
               <p className="text-sm text-gray-400">NVDA</p>
 
-              <h3 className="text-emerald-400 text-lg sm:text-xl font-bold">
+              <h3 className="text-white text-lg sm:text-xl font-bold">
                 +5.71%
               </h3>
             </div>
@@ -64,7 +64,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <div className="auth-glass-card market-card">
               <p className="text-sm text-gray-400">MSFT</p>
 
-              <h3 className="text-blue-400 text-lg sm:text-xl font-bold">
+              <h3 className="text-white text-lg sm:text-xl font-bold">
                 +2.18%
               </h3>
             </div>
