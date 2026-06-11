@@ -74,7 +74,7 @@ const UserDropdown = ({
     w-72
     rounded-xl
     border border-cyan-500/10
-    bg-gradient-to-b
+    bg-linear-to-b
     from-[#0f172a]
     to-[#111827]
     text-slate-300

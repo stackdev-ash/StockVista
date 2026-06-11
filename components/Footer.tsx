@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#2A2A2A] bg-[#141414] mt-12">
+    <footer className="border-t border-[#2A2A2A] bg-gray-800 mt-12">
       <div className="container py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
@@ -37,28 +37,28 @@ export default function Footer() {
             <div className="flex flex-col gap-2">
               <Link
                 href="/"
-                className="text-gray-400 hover:text-cyan-400 transition underline"
+                className="text-gray-400 hover:text-white transition-colors duration-200 underline"
               >
                 Dashboard
               </Link>
 
               <Link
                 href="/search"
-                className="text-gray-400 hover:text-cyan-400 transition underline"
+                className="text-gray-400 hover:text-white transition-colors duration-200 underline"
               >
                 Search
               </Link>
 
               <Link
                 href="/watchlist"
-                className="text-gray-400 hover:text-cyan-400 transition underline"
+                className="text-gray-400 hover:text-white transition-colors duration-200 underline"
               >
                 Watchlist
               </Link>
 
               <Link
                 href="/news"
-                className="text-gray-400 hover:text-cyan-400 transition underline"
+                className="text-gray-400 hover:text-white transition-colors duration-200 underline"
               >
                 News
               </Link>
@@ -74,7 +74,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/in/ashish-cse/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-cyan-400 transition"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <FaLinkedin size={22} />
               </a>
@@ -83,7 +83,7 @@ export default function Footer() {
                 href="https://github.com/stackdev-ash"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-cyan-400 transition"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <FaGithub size={22} />
               </a>

@@ -15,7 +15,7 @@ export default function WatchlistCard({ watchlist }: { watchlist: any[] }) {
         </Link>
       </div>
 
-      <div className="h-[450px] rounded-xl border border-[#2A2A2A] bg-[#141414] p-5 overflow-y-auto mt-5">
+      <div className="h-112.5 rounded-xl border border-[#2A2A2A] bg-gray-800 p-5 overflow-y-auto mt-5">
         {watchlist.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4">
             <p className="text-center text-gray-400 text-lg">
@@ -24,7 +24,7 @@ export default function WatchlistCard({ watchlist }: { watchlist: any[] }) {
 
             <Link
               href="/watchlist"
-              className="px-4 py-2 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 hover:bg-cyan-500/20 transition-all duration-200"
+              className="px-4 py-2 rounded-lg bg-white/10 border border-white/15 text-white hover:bg-white/15 transition-all duration-200"
             >
               Add Stocks
             </Link>

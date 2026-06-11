@@ -38,8 +38,8 @@ const NavItems = ({
               href={href}
               className={`relative transition-all duration-200 ${
                 isActive(href)
-                  ? "text-cyan-400 font-semibold"
-                  : "text-slate-400 hover:text-cyan-300"
+                  ? "text-white font-semibold"
+                  : "text-slate-500 hover:text-gray-200"
               }`}
             >
               {label}

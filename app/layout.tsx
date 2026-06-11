@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "StockVista",
-  description: "AI-powered stock market platform with real-time prices, watchlists, alerts, financial news, and intelligent market insights.",
+  description: "Stock market platform with real-time prices, watchlists, alerts, financial news, and intelligent market insights.",
 };
 
 export default function RootLayout({
