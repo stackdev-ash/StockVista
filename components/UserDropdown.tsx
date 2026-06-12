@@ -13,11 +13,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
-const UserDropdown = ({
-  user
-}: {
-  user: User;
-}) => {
+const UserDropdown = ({ user }: { user: NonNullable<User> }) => {
   const handleSignOut = async () => {
     await signOut({
       callbackUrl: "/sign-in",

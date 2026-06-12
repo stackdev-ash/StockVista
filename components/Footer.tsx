@@ -56,12 +56,6 @@ export default function Footer() {
                 Watchlist
               </Link>
 
-              <Link
-                href="/news"
-                className="text-gray-400 hover:text-white transition-colors duration-200 underline"
-              >
-                News
-              </Link>
             </div>
           </div>
 
