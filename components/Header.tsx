@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import NavItems from "./NavItems";
+import MobileNav from "./MobileNav";
 import UserDropdown from "./UserDropdown";
 import { searchStocks } from "../lib/actions/finnhub.actions";
 
@@ -27,12 +28,13 @@ const Header = async ({ user }: { user: User }) => {
           <NavItems initialStocks={initialStocks} />
         </nav>
 
-        {user ? (
-          <UserDropdown user={user} />
-        ) : (
-          <Link
-            href="/sign-in"
-            className="
+        <div className="hidden md:block">
+          {user ? (
+            <UserDropdown user={user} />
+          ) : (
+            <Link
+              href="/sign-in"
+              className="
       px-4 py-2
       rounded-lg
       border border-white/10
@@ -42,10 +44,12 @@ const Header = async ({ user }: { user: User }) => {
       hover:bg-white/10
       transition-all
     "
-          >
-            Sign In
-          </Link>
-        )}
+            >
+              Sign In
+            </Link>
+          )}
+        </div>
+        <MobileNav user={user} initialStocks={initialStocks} />
       </div>
     </header>
   );
