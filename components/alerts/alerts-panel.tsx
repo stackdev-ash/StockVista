@@ -4,9 +4,7 @@ interface AlertsPanelProps {
   alerts: Alert[];
 }
 
-export default function AlertsPanel({
-  alerts,
-}: AlertsPanelProps) {
+export default function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
     <div
       className="
@@ -14,22 +12,20 @@ export default function AlertsPanel({
       border border-slate-800
       bg-[#0f1117]
       p-4
-      h-160
-      overflow-hidden
-      
+      h-75
+    md:h-87.5
+    overflow-hidden
     "
     >
-      
-
       {alerts.length === 0 ? (
         <div
           className="
-          h-full
           flex
           items-center
           justify-center
           text-slate-500
           text-sm
+          h-full
         "
         >
           No alerts created yet
@@ -41,15 +37,13 @@ export default function AlertsPanel({
           flex-col
           gap-4
           overflow-y-auto
-          h-155
+          h-full
           pr-1
+          scrollbar-hide-default
         "
         >
           {alerts.map((alert) => (
-            <AlertCard
-              key={alert._id}
-              alert={alert}
-            />
+            <AlertCard key={alert._id} alert={alert} />
           ))}
         </div>
       )}

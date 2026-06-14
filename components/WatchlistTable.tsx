@@ -9,8 +9,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { WATCHLIST_TABLE_HEADER } from "@/lib/constants";
-import { Button } from "./ui/button";
 import { WatchlistButton } from "./WatchlistButton";
+import MobileWatchlistCards from "./MobileWatchlistCard";
 import CreateAlertDialog from "@/components/alerts/create-alert-dialog";
 import { useRouter } from "next/navigation";
 import { cn, getChangeColorClass } from "@/lib/utils";
@@ -20,63 +20,69 @@ export function WatchlistTable({ watchlist }: WatchlistTableProps) {
 
   return (
     <>
-      <Table className="scrollbar-hide-default watchlist-table">
-        <TableHeader>
-          <TableRow className="table-header-row">
-            {WATCHLIST_TABLE_HEADER.map((label) => (
-              <TableHead className="table-header" key={label}>
-                {label}
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {watchlist.map((item, index) => (
-            <TableRow
-              key={item.symbol + index}
-              className="table-row"
-              onClick={() =>
-                router.push(`/stocks/${encodeURIComponent(item.symbol)}`)
-              }
-            >
-              <TableCell className="pl-4 table-cell">{item.company}</TableCell>
-              <TableCell className="table-cell">{item.symbol}</TableCell>
-              <TableCell className="table-cell">
-                {item.priceFormatted || "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "table-cell",
-                  getChangeColorClass(item.changePercent),
-                )}
-              >
-                {item.changeFormatted || "—"}
-              </TableCell>
-              <TableCell className="table-cell">
-                {item.marketCap || "—"}
-              </TableCell>
-              <TableCell className="table-cell">
-                {item.peRatio || "—"}
-              </TableCell>
-              <TableCell onClick={(e) => e.stopPropagation()}>
-                <CreateAlertDialog
-                  symbol={item.symbol}
-                  company={item.company}
-                />
-              </TableCell>
-              <TableCell>
-                <WatchlistButton
-                  symbol={item.symbol}
-                  company={item.company}
-                  isInWatchlist={true}
-                  showTrashIcon={true}
-                  type="icon"
-                />
-              </TableCell>
+      <MobileWatchlistCards watchlist={watchlist} />
+
+      <div className="hidden md:block">
+        <Table className="scrollbar-hide-default watchlist-table">
+          <TableHeader>
+            <TableRow className="table-header-row">
+              {WATCHLIST_TABLE_HEADER.map((label) => (
+                <TableHead className="table-header" key={label}>
+                  {label}
+                </TableHead>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {watchlist.map((item, index) => (
+              <TableRow
+                key={item.symbol + index}
+                className="table-row"
+                onClick={() =>
+                  router.push(`/stocks/${encodeURIComponent(item.symbol)}`)
+                }
+              >
+                <TableCell className="pl-4 table-cell">
+                  {item.company}
+                </TableCell>
+                <TableCell className="table-cell">{item.symbol}</TableCell>
+                <TableCell className="table-cell">
+                  {item.priceFormatted || "—"}
+                </TableCell>
+                <TableCell
+                  className={cn(
+                    "table-cell",
+                    getChangeColorClass(item.changePercent),
+                  )}
+                >
+                  {item.changeFormatted || "—"}
+                </TableCell>
+                <TableCell className="table-cell">
+                  {item.marketCap || "—"}
+                </TableCell>
+                <TableCell className="table-cell">
+                  {item.peRatio || "—"}
+                </TableCell>
+                <TableCell onClick={(e) => e.stopPropagation()}>
+                  <CreateAlertDialog
+                    symbol={item.symbol}
+                    company={item.company}
+                  />
+                </TableCell>
+                <TableCell>
+                  <WatchlistButton
+                    symbol={item.symbol}
+                    company={item.company}
+                    isInWatchlist={true}
+                    showTrashIcon={true}
+                    type="icon"
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </>
   );
 }
