@@ -1,7 +1,6 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { auth } from "../../lib/nextauth/auth";
-import { redirect } from "next/navigation";
 import User from "@/database/models/user.model";
 import { connectToDatabase } from "@/database/mongoose";
 import OnboardingGate from "@/components/onboarding/OnboardingGate";

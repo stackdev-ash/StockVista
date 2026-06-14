@@ -30,7 +30,7 @@ const Home = async () => {
           />
         </div>
 
-        <div className="md:col-span-1 xl:col-span-2">
+        <div className="md:col-span-1 xl:col-span-2 scrollbar-hide-default">
           {session?.user ? (
             <WatchlistCard watchlist={watchlist} />
           ) : (
