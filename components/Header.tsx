@@ -6,7 +6,7 @@ import UserDropdown from "./UserDropdown";
 import { searchStocks } from "../lib/actions/finnhub.actions";
 
 const Header = async ({ user }: { user: User }) => {
-  const initialStocks = await searchStocks();
+  const initialStocks = [];
 
   return (
     <header className="sticky top-0 header">
@@ -25,7 +25,7 @@ const Header = async ({ user }: { user: User }) => {
         </Link>
 
         <nav className="hidden sm:block">
-          <NavItems initialStocks={initialStocks} />
+          <NavItems initialStocks={[]} />
         </nav>
 
         <div className="hidden md:block">
@@ -49,7 +49,7 @@ const Header = async ({ user }: { user: User }) => {
             </Link>
           )}
         </div>
-        <MobileNav user={user} initialStocks={initialStocks} />
+        <MobileNav user={user} initialStocks={[]} />
       </div>
     </header>
   );

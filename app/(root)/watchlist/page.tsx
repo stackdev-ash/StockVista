@@ -14,9 +14,9 @@ const Watchlist = async () => {
   if (!session?.user) {
     redirect("/sign-in");
   }
-  
+
   const watchlist: any = await getWatchlistWithData();
-  const initialStocks = await searchStocks();
+  const initialStocks: StockWithWatchlistStatus[] = [];
   const alerts = await getUserAlerts();
 
   // Empty state

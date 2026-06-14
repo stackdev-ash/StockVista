@@ -85,16 +85,21 @@ export const addToWatchlist = async (symbol: string, company: string) => {
       return { success: false, error: "Stock already in watchlist" };
     }
 
+    const stockData = await getStocksDetails(symbol);
+
+    const logo = stockData?.logo || "";
+
     // Add to watchlist
     const newItem = new Watchlist({
       userId,
       symbol: symbol.toUpperCase(),
       company: company.trim(),
+      logo,
     });
 
     await newItem.save();
     revalidatePath("/watchlist");
-    revalidatePath("/");
+    // revalidatePath("/");
 
     return { success: true, message: "Stock added to watchlist" };
   } catch (error) {
@@ -170,9 +175,9 @@ export const getWatchlistWithData = async () => {
           }
 
           return {
-            company: stockData.company,
-            symbol: stockData.symbol,
-            logo: stockData.logo,
+            company: item.company,
+            symbol: item.symbol,
+            logo: item.logo,
             currentPrice: stockData.currentPrice,
             priceFormatted: stockData.priceFormatted,
             changeFormatted: stockData.changeFormatted,

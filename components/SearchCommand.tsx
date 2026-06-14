@@ -25,6 +25,23 @@ export default function SearchCommand({
   const [stocks, setStocks] =
     useState<StockWithWatchlistStatus[]>(initialStocks);
 
+  useEffect(() => {
+    const loadPopularStocks = async () => {
+      if (!open || stocks.length > 0) return;
+
+      setLoading(true);
+
+      try {
+        const results = await searchStocks();
+        setStocks(results);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPopularStocks();
+  }, [open, stocks.length]);
+
   const isSearchMode = !!searchTerm.trim();
   const displayStocks = isSearchMode ? stocks : stocks?.slice(0, 10);
 
@@ -53,7 +70,7 @@ export default function SearchCommand({
     }
   };
 
-  const debouncedSearch = useDebounce(handleSearch, 300);
+  const debouncedSearch = useDebounce(handleSearch, 500);
 
   useEffect(() => {
     debouncedSearch();
@@ -68,10 +85,10 @@ export default function SearchCommand({
   // Handle watchlist changes status change
   const handleWatchlistChange = async (symbol: string, isAdded: boolean) => {
     // Update current stocks
-    setStocks(
-      initialStocks?.map((stock) =>
+    setStocks((prev) =>
+      prev.map((stock) =>
         stock.symbol === symbol ? { ...stock, isInWatchlist: isAdded } : stock,
-      ) || [],
+      ),
     );
   };
 
