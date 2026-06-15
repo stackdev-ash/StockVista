@@ -45,7 +45,7 @@ const AlertSchema = new Schema(
 
     frequency: {
       type: String,
-      enum: ["once", "hourly", "daily"],
+      enum: ["once", "daily"],
       default: "once",
     },
 
@@ -54,11 +54,14 @@ const AlertSchema = new Schema(
       default: true,
     },
 
-    lastTriggeredAt: Date,
+    lastTriggeredAt: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default models.Alert || model("Alert", AlertSchema);

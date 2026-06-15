@@ -49,7 +49,7 @@ export default function CreateAlertDialog({
 
   const [loading, setLoading] = useState(false);
 
-  const [frequency, setFrequency] = useState<"once" | "hourly" | "daily">(
+  const [frequency, setFrequency] = useState<"once" | "daily">(
     alert?.frequency || "once",
   );
 
@@ -177,12 +177,11 @@ export default function CreateAlertDialog({
           <select
             value={frequency}
             onChange={(e) =>
-              setFrequency(e.target.value as "once" | "hourly" | "daily")
+              setFrequency(e.target.value as "once" | "daily")
             }
             className="w-full h-10 rounded-md bg-[#1f232b] border border-slate-700 p-2"
           >
             <option value="once">Once</option>
-            <option value="hourly">Hourly</option>
             <option value="daily">Daily</option>
           </select>
 
