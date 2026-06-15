@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 
 import User from "@/database/models/user.model";
 import { connectToDatabase } from "@/database/mongoose";
+import { sendWelcomeEmail } from "../nodemailer/index";
 
 export async function signUpWithEmail(data: SignUpFormData) {
   try {
@@ -22,15 +23,24 @@ export async function signUpWithEmail(data: SignUpFormData) {
       };
     }
 
-    const hashedPassword = await bcrypt.hash(
-      data.password,
-      10
-    );
+    const hashedPassword = await bcrypt.hash(data.password, 10);
 
     await User.create({
       name: data.fullName.trim(),
       email,
       password: hashedPassword,
+    });
+
+    sendWelcomeEmail({
+      email,
+      name: data.fullName.trim(),
+      intro: `
+    <p style="font-size:16px;color:#CCDADC;line-height:1.6;">
+      Thanks for joining StockVista.
+      Your account is now ready and you can start tracking stocks,
+      creating alerts and building your watchlist.
+    </p>
+  `,
     });
 
     return {
