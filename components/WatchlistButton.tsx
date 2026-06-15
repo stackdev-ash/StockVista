@@ -37,6 +37,11 @@ export const WatchlistButton = ({
       return;
     }
 
+    if ("rateLimited" in result && result.rateLimited) {
+      toast.error("Stock data service is busy. Please try again in a minute.");
+      return;
+    }
+
     if (result.success) {
       setAdded(!added);
 

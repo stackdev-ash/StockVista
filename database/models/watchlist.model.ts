@@ -1,11 +1,13 @@
-import { Schema, model, models, type Document, type Model } from 'mongoose';
+import { Schema, model, models, type Document, type Model } from "mongoose";
 
 export interface WatchlistItem extends Document {
   userId: string;
   symbol: string;
   company: string;
   addedAt: Date;
-  logo: String;
+  logo: string;
+  marketCap: string;
+  peRatio: string;
 }
 
 const WatchlistSchema = new Schema<WatchlistItem>(
@@ -14,13 +16,16 @@ const WatchlistSchema = new Schema<WatchlistItem>(
     symbol: { type: String, required: true, uppercase: true, trim: true },
     company: { type: String, required: true, trim: true },
     addedAt: { type: Date, default: Date.now },
-    logo: { type: String, default: "" }
+    logo: { type: String, default: "" },
+    marketCap: { type: String, default: "" },
+    peRatio: { type: String, default: "" },
   },
-  { timestamps: false }
+  { timestamps: false },
 );
 
 // Prevent duplicate symbols per user
 WatchlistSchema.index({ userId: 1, symbol: 1 }, { unique: true });
 
 export const Watchlist: Model<WatchlistItem> =
-  (models?.Watchlist as Model<WatchlistItem>) || model<WatchlistItem>('Watchlist', WatchlistSchema);
+  (models?.Watchlist as Model<WatchlistItem>) ||
+  model<WatchlistItem>("Watchlist", WatchlistSchema);

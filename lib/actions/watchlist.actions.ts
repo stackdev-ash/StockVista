@@ -4,7 +4,7 @@ import { connectToDatabase } from "@/database/mongoose";
 import { Watchlist } from "@/database/models/watchlist.model";
 import { revalidatePath } from "next/cache";
 import { auth } from "../nextauth/auth";
-import { getStocksDetails } from "@/lib/actions/finnhub.actions";
+import { getStocksDetails, getWatchlistStockData } from "@/lib/actions/finnhub.actions";
 
 async function getCurrentUserId() {
   const session = await auth();
@@ -87,7 +87,17 @@ export const addToWatchlist = async (symbol: string, company: string) => {
 
     const stockData = await getStocksDetails(symbol);
 
+    if (!stockData) {
+      return {
+        success: false,
+        rateLimited: true,
+        message: "Please wait before adding more stocks.",
+      };
+    }
+
     const logo = stockData?.logo || "";
+    const marketCap = stockData?.marketCapFormatted || "";
+    const peRatio = stockData?.peRatio || "";
 
     // Add to watchlist
     const newItem = new Watchlist({
@@ -95,6 +105,8 @@ export const addToWatchlist = async (symbol: string, company: string) => {
       symbol: symbol.toUpperCase(),
       company: company.trim(),
       logo,
+      marketCap,
+      peRatio,
     });
 
     await newItem.save();
@@ -103,7 +115,16 @@ export const addToWatchlist = async (symbol: string, company: string) => {
 
     return { success: true, message: "Stock added to watchlist" };
   } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT_EXCEEDED") {
+      return {
+        success: false,
+        rateLimited: true,
+        message: "Stock data service is busy. Please try again in a minute.",
+      };
+    }
+
     console.error("Error adding to watchlist:", error);
+
     throw new Error("Failed to add stock to watchlist");
   }
 };
@@ -159,7 +180,7 @@ export const getWatchlistWithData = async () => {
     const stocksWithData = await Promise.all(
       watchlist.map(async (item) => {
         try {
-          const stockData = await getStocksDetails(item.symbol);
+          const stockData = await getWatchlistStockData(item.symbol);
 
           if (!stockData) {
             return {
@@ -169,8 +190,8 @@ export const getWatchlistWithData = async () => {
               priceFormatted: "N/A",
               changeFormatted: "N/A",
               changePercent: 0,
-              marketCap: "N/A",
-              peRatio: "N/A",
+              marketCap: item.marketCap,
+              peRatio: item.peRatio,
             };
           }
 
@@ -182,8 +203,8 @@ export const getWatchlistWithData = async () => {
             priceFormatted: stockData.priceFormatted,
             changeFormatted: stockData.changeFormatted,
             changePercent: stockData.changePercent,
-            marketCap: stockData.marketCapFormatted,
-            peRatio: stockData.peRatio,
+            marketCap: item.marketCap,
+            peRatio: item.peRatio,
           };
         } catch {
           return {
