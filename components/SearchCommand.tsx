@@ -109,7 +109,7 @@ export default function SearchCommand({
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        className="search-dialog"
+        className="search-dialog scrollbar-hide-default"
         showCloseButton
       >
         <div className="search-field">

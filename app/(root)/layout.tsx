@@ -36,7 +36,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           userId={dbUser._id.toString()}
         />
       )}
-      <div className="container py-10 flex-1">{children}</div>
+      <div className="container py-8 flex-1">{children}</div>
 
       <Footer />
     </main>
