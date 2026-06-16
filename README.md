@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1 align="center">
+  StockVista
+  <a href="https://stockvista-one.vercel.app">
+    • Live Demo
+  </a>
+</h1>
 
-## Getting Started
+<p align="center">
+Modern stock market platform for tracking stocks, managing watchlists, and setting real-time price alerts.
+</p>
 
-First, run the development server:
+<p align="center">
+  📈 Track Stocks • ⭐ Watchlists • 🔔 Price Alerts • 📧 Email Notifications
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-blue?logo=typescript" />
+  <img src="https://img.shields.io/badge/MongoDB-green?logo=mongodb" />
+  <img src="https://img.shields.io/badge/Vercel-black?logo=vercel" />
+</p>
+
+---
+
+## 🚀 Features
+
+* Search stocks by ticker or company name
+* Personalized watchlists
+* Real-time market data from Finnhub
+* Interactive TradingView charts
+* One-time and recurring price alerts
+* Welcome and alert email notifications
+* Secure authentication with NextAuth
+* Optimized API usage and caching
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:** Next.js 16, React, TypeScript, Tailwind CSS, shadcn/ui
+
+**Backend:** MongoDB, Mongoose, Next.js Server Actions
+
+**Services:** Finnhub API, TradingView Widgets, Auth.js, Nodemailer
+
+**Deployment:** Vercel
+
+---
+
+## 📸 Screenshots
+
+### 📊 Dashboard
+
+<p align="center">
+  <img src="./public/assets/images/dashboard.png" width="900" alt="Dashboard" />
+</p>
+
+### 🔍 Stock Search
+
+<p align="center">
+  <img src="./public/assets/images/search.png" width="900" alt="Search" />
+</p>
+
+### ⭐ Watchlist & Alerts
+
+<p align="center">
+  <img src="./public/assets/images/watchlist-alert.png" width="900" alt="Watchlist and Alerts" />
+</p>
+
+### 📈 Stock Details
+
+<p align="center">
+  <img src="./public/assets/images/stockpage.png" width="900" alt="Stock Details" />
+</p>
+
+---
+
+## ⚙️ Getting Started
 
 ```bash
+git clone https://github.com/stackdev-ash/StockVista.git
+
+cd StockVista
+
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` file:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+MONGODB_URL=
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
 
-## Learn More
+FINNHUB_API_KEY=
+NEXT_PUBLIC_FINNHUB_API_KEY=
 
-To learn more about Next.js, take a look at the following resources:
+NODEMAILER_EMAIL=
+NODEMAILER_PASSWORD=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```txt
+http://localhost:3000
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔮 Future Improvements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Portfolio tracking
+* Daily market news summaries
+* Watchlist-specific news feed
+* Advanced analytics
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider starring the repository:
+
+https://github.com/stackdev-ash/StockVista
