@@ -166,7 +166,7 @@ export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 0 40px 0; width: 100%;">
     <tr>
         <td align="center">
-            <a href="http://localhost:3000/"
+            <a href="https://stockvista-one.vercel.app/"
                style="
                     display:block;
                     width:100%;
@@ -202,7 +202,7 @@ style="
     Track stocks, create alerts, and stay informed with market insights.<br><br>
 
     <a
-        href="http://localhost:3000/"
+        href="https://stockvista-one.vercel.app/"
         style="
             color:#FFFFFF !important;
             text-decoration:none;
@@ -373,8 +373,8 @@ export const NEWS_SUMMARY_EMAIL_TEMPLATE = `<!DOCTYPE html>
                                     You're receiving this because you subscribed to StockVista news updates.
                                 </p>
                                 <p style="margin: 0 0 10px 0; font-size: 14px; line-height: 1.5; color: #CCDADC !important;">
-                                    <a href="#" style="color: #CCDADC !important; text-decoration: underline;">Unsubscribe</a> | 
-                                    <a href="" style="color: #CCDADC !important; text-decoration: underline;">Visit StockVista</a>
+                                    <a href="https://stockvista-one.vercel.app/" style="color: #CCDADC !important; text-decoration: underline;">Unsubscribe</a> | 
+                                    <a href="https://stockvista-one.vercel.app/" style="color: #CCDADC !important; text-decoration: underline;">Visit StockVista</a>
                                 </p>
                                 <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CCDADC !important;">
                                     © 2025 StockVista
@@ -617,7 +617,7 @@ export const STOCK_ALERT_UPPER_EMAIL_TEMPLATE = `<!DOCTYPE html>
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 30px;">
                                 <tr>
                                     <td align="center">
-                                        <a href="" style=" display:block; width:100%; max-width:100%; box-sizing:border-box; background-color:#FFFFFF; color:#050505; text-decoration:none; padding:16px 32px; border-radius:8px; font-size:16px; font-weight:600; line-height:1; text-align:center">
+                                        <a href="https://stockvista-one.vercel.app/" style=" display:block; width:100%; max-width:100%; box-sizing:border-box; background-color:#FFFFFF; color:#050505; text-decoration:none; padding:16px 32px; border-radius:8px; font-size:16px; font-weight:600; line-height:1; text-align:center">
                                             View Dashboard
                                         </a>
                                     </td>
@@ -639,7 +639,7 @@ export const STOCK_ALERT_UPPER_EMAIL_TEMPLATE = `<!DOCTYPE html>
         <br><br>
 
         <a
-            href="http://localhost:3000/"
+            href="https://stockvista-one.vercel.app/"
             style="
                 color:#FFFFFF;
                 text-decoration:none;
@@ -889,7 +889,7 @@ export const STOCK_ALERT_LOWER_EMAIL_TEMPLATE = `<!DOCTYPE html>
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 30px;">
                                 <tr>
                                     <td align="center">
-                                        <a href="" style=" display:block; width:100%; max-width:100%; box-sizing:border-box; background-color:#FFFFFF; color:#050505; text-decoration:none; padding:16px 32px; border-radius:8px; font-size:16px; font-weight:600; line-height:1; text-align:center;">
+                                        <a href="https://stockvista-one.vercel.app" style=" display:block; width:100%; max-width:100%; box-sizing:border-box; background-color:#FFFFFF; color:#050505; text-decoration:none; padding:16px 32px; border-radius:8px; font-size:16px; font-weight:600; line-height:1; text-align:center;">
                                             View Dashboard
                                         </a>
                                     </td>
@@ -911,7 +911,7 @@ export const STOCK_ALERT_LOWER_EMAIL_TEMPLATE = `<!DOCTYPE html>
         <br><br>
 
         <a
-            href="http://localhost:3000/"
+            href="https://stockvista-one.vercel.app"
             style="
                 color:#FFFFFF;
                 text-decoration:none;
