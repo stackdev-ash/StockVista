@@ -4,6 +4,7 @@ import { auth } from "../../lib/nextauth/auth";
 import { revalidatePath } from "next/cache";
 import Alert from "@/database/models/alert.model";
 import { connectToDatabase } from "@/database/mongoose";
+import { getWatchlistStockData } from "./finnhub.actions";
 
 const getCurrentUserId = async () => {
   const session = await auth();
@@ -39,7 +40,6 @@ export const createAlert = async ({
   frequency,
 }: AlertData) => {
   try {
-
     await connectToDatabase();
 
     const userId = await getCurrentUserId();
@@ -58,6 +58,10 @@ export const createAlert = async ({
       };
     }
 
+    const stockData = await getWatchlistStockData(symbol);
+
+    const currentPrice = stockData?.currentPrice || 0;
+
     const alert = await Alert.create({
       userId,
       symbol: symbol.toUpperCase(),
@@ -66,7 +70,7 @@ export const createAlert = async ({
       alertType,
       threshold: Number(threshold),
       frequency,
-      currentPrice: 0,
+      currentPrice,
       isActive: true,
     });
 
@@ -141,7 +145,7 @@ export const updateAlert = async (alertId: string, data: AlertData) => {
     alert.alertName = data.alertName;
     alert.alertType = data.alertType;
     alert.threshold = Number(data.threshold);
-    alert.frequency=data.frequency;
+    alert.frequency = data.frequency;
 
     await alert.save();
 
