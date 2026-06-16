@@ -146,22 +146,22 @@
     @apply mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-8;
   }
   .cyan-btn {
-    @apply h-12 w-full rounded-xl cursor-pointer font-semibold text-base text-white transition-all duration-300;
+    @apply h-12 w-full rounded-xl cursor-pointer font-semibold text-base text-black transition-all duration-300;
 
-    background: linear-gradient(135deg, #2563eb, #06b6d4, #10b981);
+    background: linear-gradient(135deg, #ffffff, #e5e7eb);
 
-    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.08);
   }
 
   .cyan-btn:hover {
     transform: translateY(-2px);
-
-    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.28);
+    filter: brightness(1.05);
   }
 
   .cyan-btn:active {
     transform: translateY(0);
   }
+
   .home-wrapper {
     @apply text-gray-400 flex-col gap-4 md:gap-10 items-center sm:items-start;
   }
@@ -175,26 +175,26 @@
     @apply flex justify-between items-center px-6 py-4 text-gray-500;
   }
   .auth-hero-highlight {
-    @apply bg-gradient-to-r from-blue-500 via-cyan-400 to-emerald-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent;
   }
 
   .auth-glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl p-5;
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-2xl p-5;
   }
   .auth-layout {
     @apply flex flex-col lg:flex-row min-h-screen relative overflow-hidden;
     background:
       radial-gradient(
         circle at top left,
-        rgba(37, 99, 235, 0.15),
+        rgba(255, 255, 255, 0.04),
         transparent 35%
       ),
       radial-gradient(
         circle at bottom right,
-        rgba(16, 185, 129, 0.12),
+        rgba(255, 255, 255, 0.03),
         transparent 40%
       ),
-      #050816;
+      #050505;
   }
   .auth-logo {
     @apply absolute top-6 left-6;
@@ -215,8 +215,12 @@
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15);
   }
   .auth-left-section {
-    @apply w-full lg:w-[52%] h-screen px-8 lg:px-20 flex flex-col justify-center overflow-hidden relative;
-
+    @apply w-full lg:w-[52%]
+  py-20 lg:py-0
+  px-8 lg:px-20
+  flex flex-col
+  justify-center
+  relative;
     background: rgba(0, 0, 0, 0.18);
 
     border-right: 1px solid rgba(255, 255, 255, 0.05);
@@ -231,13 +235,12 @@
     width: 1px;
     height: 100%;
 
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      rgba(37, 99, 235, 0.4),
-      rgba(16, 185, 129, 0.4),
-      transparent
-    );
+     background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255,255,255,0.12),
+    transparent
+  );
   }
   .auth-right-section {
     @apply w-full lg:w-[48%] h-screen flex items-center justify-center px-8 lg:px-16 bg-transparent;
@@ -252,9 +255,7 @@
     @apply border-6 border-gray-800 left-0 hidden w-[1024px] h-auto max-w-none lg:block rounded-xl shadow-2xl;
   }
   .auth-form-card {
-    @apply w-full max-w-[460px] rounded-3xl border border-white/15
-  backdrop-blur-xl bg-white/[0.06]
-  p-10 shadow-2xl relative overflow-hidden;
+    @apply w-full max-w-[460px] rounded-3xl border border-white/15 backdrop-blur-2xl bg-white/[0.03] p-8 shadow-2xl relative overflow-hidden;
   }
 
   .auth-form-card::before {
@@ -262,21 +263,38 @@
     position: absolute;
     inset: 0;
 
-    background:
-      radial-gradient(
-        circle at top center,
-        rgba(59, 130, 246, 0.2),
-        transparent 35%
-      ),
-      radial-gradient(
-        circle at bottom center,
-        rgba(16, 185, 129, 0.15),
-        transparent 40%
-      );
+    background: radial-gradient(
+      circle at top center,
+      rgba(255, 255, 255, 0.08),
+      transparent 35%
+    );
     pointer-events: none;
   }
+
+  .signup-form-card {
+    @apply max-w-[500px] px-6 py-4 mt-1;
+  }
+
+  .signup-form {
+    @apply space-y-3;
+  }
+
+  .signup-form .form-input {
+    @apply h-12 text-sm;
+  }
+
+  .signup-form .form-label {
+    @apply text-sm;
+  }
+
+  .signup-subtitle {
+    @apply text-gray-400 text-lg mb-7 mt-2;
+  }
+  .signup-form-card .form-title {
+    @apply text-3xl mb-2;
+  }
   .form-title {
-    @apply text-5xl font-bold text-white mb-3;
+    @apply text-4xl font-bold text-white mb-3;
   }
   .form-subtitle {
     @apply text-gray-400 text-lg mb-8;
@@ -287,10 +305,10 @@
   .form-input {
     @apply h-14 px-4 text-white text-base
   placeholder:text-gray-500
-  border border-white/15
-  bg-[#0b1730]
+  border border-white/10
+  bg-[#0f1115]
   rounded-xl
-  focus:border-blue-500
+  focus:border-white/30
   transition-all;
   }
   .select-trigger {
@@ -303,22 +321,25 @@
   focus:ring-0;
   }
   .footer-link {
-    @apply text-gray-400 font-medium hover:text-blue-400 hover:underline transition-colors;
+    @apply text-gray-400 font-medium hover:text-white hover:underline transition-colors;
   }
   .search-text {
-    @apply cursor-pointer hover:text-yellow-500;
+    @apply cursor-pointer text-slate-500 hover:text-gray-200 transition-all duration-200;
   }
   .search-btn {
-    @apply cursor-pointer px-4 py-2 w-fit flex items-center gap-2 text-sm md:text-base bg-yellow-500 hover:bg-yellow-500 text-black font-medium rounded;
+    @apply cursor-pointer px-4 py-2 w-fit flex items-center gap-2 text-sm md:text-base rounded font-medium text-slate-500 hover:text-gray-200 transition-all duration-200;
+  }
+  .search-btn-active {
+    @apply text-white font-semibold;
   }
   .search-dialog {
-    @apply !bg-gray-800 lg:min-w-[800px] border-gray-600 fixed top-10 left-1/2 -translate-x-1/2 translate-y-10;
+    @apply !bg-[#1b1d23] lg:min-w-[800px] border-gray-600 fixed top-4 left-1/2 -translate-x-1/2 translate-y-10;
   }
   .search-field {
-    @apply !bg-gray-800 border-b border-gray-600 relative;
+    @apply !bg-[#1b1d23] border-b border-gray-600 relative;
   }
   .search-list {
-    @apply !bg-gray-800 max-h-[400px];
+    @apply !bg-[#1b1d23] max-h-[450px];
   }
   .search-list-indicator {
     @apply px-5 py-2;
@@ -327,19 +348,22 @@
     @apply py-6 !bg-transparent text-center text-gray-500;
   }
   .search-input {
-    @apply !bg-gray-800 border-0 text-gray-400 placeholder:text-gray-500 focus:ring-0 text-base h-14 pr-10;
+    @apply text-gray-400 placeholder:text-gray-500 focus:ring-0 text-base h-14;
   }
   .search-loader {
     @apply absolute right-12 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 animate-spin;
   }
   .search-count {
-    @apply py-2 px-4 text-sm font-medium text-gray-400 bg-gray-700 border-b border-gray-700;
+    @apply py-2 px-4 text-sm font-medium text-gray-400 bg-[#141414] border-b border-gray-700;
   }
   .search-item {
-    @apply rounded-none my-3 px-1 w-full data-[selected=true]:bg-gray-600;
+    @apply w-full;
   }
   .search-item-link {
-    @apply px-2 w-full cursor-pointer border-b border-gray-600 last:border-b-0 transition-colors flex items-center gap-3;
+    @apply flex items-center gap-3
+  px-5 py-4
+  border-b border-[#2A2D35]
+  hover:bg-[#23262F];
   }
   .search-item-name {
     @apply font-medium text-base text-gray-400;
@@ -357,7 +381,7 @@
     @apply bg-red-500! hover:bg-red-500! text-gray-900!;
   }
   .watchlist-empty-container {
-    @apply container gap-8 flex-col items-center md:mt-10 p-6 text-center;
+    @apply container gap-8 flex-col items-center md:mt-10 p-6 text-center justify-center;
   }
   .watchlist-empty {
     @apply flex flex-col items-center justify-center text-center;
@@ -418,60 +442,6 @@
   }
   .watchlist-news {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
-  }
-  .news-item {
-    @apply bg-gray-800 rounded-lg border w-full border-gray-600  p-4 duration-200 hover:border-gray-600 cursor-pointer;
-  }
-  .news-tag {
-    @apply inline-block w-fit px-2 py-1 mb-5 rounded bg-gray-600/60 text-green-500 text-sm font-mono font-medium;
-  }
-  .news-title {
-    @apply text-lg  font-semibold text-gray-100 leading-tight mb-3 line-clamp-2;
-  }
-  .news-meta {
-    @apply flex items-center text-sm text-gray-500 mb-1;
-  }
-  .news-summary {
-    @apply text-gray-400 flex-1 text-base leading-relaxed mb-3 line-clamp-3;
-  }
-  .news-cta {
-    @apply text-sm align-bottom text-yellow-500 hover:text-gray-400;
-  }
-  .alert-dialog {
-    @apply bg-gray-800 border-gray-600 text-gray-400 max-w-md;
-  }
-  .alert-title {
-    @apply text-xl font-semibold text-gray-100;
-  }
-  .alert-list {
-    @apply overflow-y-auto w-full max-h-[911px] rounded-lg flex border border-gray-600 flex-col gap-4 bg-gray-800 p-3 flex-1;
-  }
-  .alert-empty {
-    @apply px-6 py-8 text-center text-gray-500/50;
-  }
-  .alert-item {
-    @apply p-4 rounded-lg bg-gray-700 border border-gray-600;
-  }
-  .alert-name {
-    @apply mb-2 text-lg text-yellow-500 font-semibold;
-  }
-  .alert-details {
-    @apply flex border-b pb-3 items-center justify-between gap-3 mb-2;
-  }
-  .alert-company {
-    @apply text-gray-400 text-base;
-  }
-  .alert-price {
-    @apply text-gray-100 font-bold;
-  }
-  .alert-actions {
-    @apply flex items-end justify-between;
-  }
-  .alert-update-btn {
-    @apply text-gray-400 rounded-full bg-transparent hover:bg-green-500/15 cursor-pointer;
-  }
-  .alert-delete-btn {
-    @apply text-gray-400 rounded-full hover:bg-red-600/15 bg-transparent cursor-pointer transition-colors;
   }
 }
 

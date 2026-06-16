@@ -3,7 +3,7 @@ import Image from "next/image";
 import NavItems from "./NavItems";
 import MobileNav from "./MobileNav";
 import UserDropdown from "./UserDropdown";
-import { searchStocks } from "../lib/actions/finnhub.actions";
+import { FaGithub } from "react-icons/fa";
 
 const Header = async ({ user }: { user: User }) => {
   const initialStocks = [];
@@ -28,22 +28,23 @@ const Header = async ({ user }: { user: User }) => {
           <NavItems initialStocks={[]} />
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            href="https://github.com/stackdev-ash/StockVista"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-lg border border-[#2A2A2A] bg-white/5 px-3 py-2 text-white hover:bg-white/10 transition"
+          >
+            <FaGithub size={14} fill="currentColor" />
+            Star Us
+          </Link>
+
           {user ? (
             <UserDropdown user={user} />
           ) : (
             <Link
               href="/sign-in"
-              className="
-      px-4 py-2
-      rounded-lg
-      border border-white/10
-      bg-white/5
-      text-white
-      font-medium
-      hover:bg-white/10
-      transition-all
-    "
+              className="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-white font-medium hover:bg-white/10 transition-all"
             >
               Sign In
             </Link>

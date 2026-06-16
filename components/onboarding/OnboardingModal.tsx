@@ -61,7 +61,7 @@ const OnboardingModal = ({ userId }: OnboardingModalProps) => {
       <div className="w-full max-w-md rounded-2xl bg-gray-800 p-6">
         <h2 className="text-2xl font-bold text-white">Welcome to StockVista</h2>
 
-        <p className="mt-2 text-gray-400">Let's personalize your experience.</p>
+        <p className="mt-2 text-gray-400">Let&apos;s personalize your experience.</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mt-6">
           <SelectField

@@ -26,13 +26,25 @@ export function delay(ms: number) {
 }
 
 // Formatted string like "$3.10T", "$900.00B", "$25.00M" or "$999,999.99"
-export function formatMarketCapValue(marketCapUsd: number): string {
-  if (!Number.isFinite(marketCapUsd) || marketCapUsd <= 0) return 'N/A';
+export function formatMarketCapValue(marketCap: number): string {
+  if (!Number.isFinite(marketCap) || marketCap <= 0) {
+    return "N/A";
+  }
 
-  if (marketCapUsd >= 1e12) return `$${(marketCapUsd / 1e12).toFixed(2)}T`; // Trillions
-  if (marketCapUsd >= 1e9) return `$${(marketCapUsd / 1e9).toFixed(2)}B`; // Billions
-  if (marketCapUsd >= 1e6) return `$${(marketCapUsd / 1e6).toFixed(2)}M`; // Millions
-  return `$${marketCapUsd.toFixed(2)}`; // Below one million, show full USD amount
+  // Finnhub returns market cap in MILLIONS
+
+  // Trillions
+  if (marketCap >= 1_000_000) {
+    return `$${(marketCap / 1_000_000).toFixed(2)}T`;
+  }
+
+  // Billions
+  if (marketCap >= 1_000) {
+    return `$${(marketCap / 1_000).toFixed(2)}B`;
+  }
+
+  // Millions
+  return `$${marketCap.toFixed(2)}M`;
 }
 
 export const getDateRange = (days: number) => {
@@ -116,7 +128,7 @@ export const formatPrice = (price: number) => {
   }).format(price);
 };
 
-export const formatDateToday = new Date().toLocaleDateString('en-US', {
+export const formatDateToday = () => new Date().toLocaleDateString('en-US', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
@@ -129,11 +141,3 @@ export const getAlertText = (alert: Alert) => {
   const condition = alert.alertType === 'upper' ? '>' : '<';
   return `Price ${condition} ${formatPrice(alert.threshold)}`;
 };
-
-export const getFormattedTodayDate = () => new Date().toLocaleDateString('en-US', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-});

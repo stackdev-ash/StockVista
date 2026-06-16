@@ -17,6 +17,7 @@ import {
 
 import SearchCommand from "./SearchCommand";
 import UserDropdown from "./UserDropdown";
+import { FaGithub } from "react-icons/fa";
 
 interface MobileNavProps {
   initialStocks: StockWithWatchlistStatus[];
@@ -102,12 +103,33 @@ export default function MobileNav({ initialStocks, user }: MobileNavProps) {
             );
           })}
 
+          <Link
+            href="https://github.com/stackdev-ash/StockVista"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+    flex items-center justify-center gap-2
+    rounded-lg
+    border border-white/10
+    bg-white/5
+    px-3 py-2.5
+    text-sm font-medium text-white
+    hover:bg-white/10
+    transition-all
+  "
+          >
+            <FaGithub size={14} fill="currentColor" />
+            Star Us on GitHub
+          </Link>
+
           <div className="border-t border-slate-800 pt-5">
             {user ? (
               <>
-              <div className="flex gap-2">
-                <UserDropdown user={user} />
-                <span className="text-white font-semibold text-base mt-1.5">{user.name}</span>
+                <div className="flex gap-2">
+                  <UserDropdown user={user} />
+                  <span className="text-white font-semibold text-base mt-1.5">
+                    {user.name}
+                  </span>
                 </div>
               </>
             ) : (
