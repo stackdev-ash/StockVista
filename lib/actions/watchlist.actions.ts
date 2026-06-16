@@ -4,7 +4,10 @@ import { connectToDatabase } from "@/database/mongoose";
 import { Watchlist } from "@/database/models/watchlist.model";
 import { revalidatePath } from "next/cache";
 import { auth } from "../nextauth/auth";
-import { getStocksDetails, getWatchlistStockData } from "@/lib/actions/finnhub.actions";
+import {
+  getStocksDetails,
+  getWatchlistStockData,
+} from "@/lib/actions/finnhub.actions";
 
 async function getCurrentUserId() {
   const session = await auth();
@@ -74,6 +77,18 @@ export const addToWatchlist = async (symbol: string, company: string) => {
     }
 
     const userId = String(user._id);
+
+    const watchlistCount = await Watchlist.countDocuments({
+      userId,
+    });
+
+    if (watchlistCount >= 8) {
+      return {
+        success: false,
+        limitReached: true,
+        message: "Maximum 8 stocks allowed in watchlist.",
+      };
+    }
 
     // Check if stock already exists in watchlist
     const existingItem = await Watchlist.findOne({

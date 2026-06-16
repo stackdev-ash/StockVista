@@ -42,6 +42,11 @@ export const WatchlistButton = ({
       return;
     }
 
+    if ("limitReached" in result && result.limitReached) {
+      toast.error("You can track up to 8 stocks in your watchlist.");
+      return;
+    }
+
     if (result.success) {
       setAdded(!added);
 
