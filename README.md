@@ -110,6 +110,29 @@ http://localhost:3000
 
 ---
 
+## 📝 Notes
+
+* Price alert functionality is fully implemented and tested.
+* Daily recurring alert emails are intentionally disabled in production to prevent automated emails from being sent through a personal SMTP account.
+* To enable recurring alerts, create a `vercel.json` file and configure a Vercel Cron Job to call `/api/check-alerts` on a schedule.
+
+Example:
+
+```json
+{
+  "crons": [
+    {
+      "path": "/api/check-alerts",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}
+```
+
+This configuration will run the alert checker once daily at 09:00 UTC.
+
+---
+
 ## 🔮 Future Improvements
 
 * Portfolio tracking
