@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ObjectId } from "mongodb";
+import { Types } from "mongoose";
 
 import Alert from "@/database/models/alert.model";
 import { connectToDatabase } from "@/database/mongoose";
@@ -44,7 +44,7 @@ export async function GET() {
         const currentPrice = stockData.currentPrice;
 
         const user = await db.collection("users").findOne({
-          _id: new ObjectId(alert.userId),
+          _id: new Types.ObjectId(alert.userId),
         });
 
         if (!user?.email) continue;
