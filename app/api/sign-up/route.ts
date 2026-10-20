@@ -1,33 +1,41 @@
-import bcrypt from "bcryptjs";
-import User from "../../../database/models/user.model";
-import { connectToDatabase } from "../../../database/mongoose";
+import { NextResponse } from "next/server";
+import { signUpWithEmail } from "@/lib/actions/auth.actions";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  await connectToDatabase();
+    const result = await signUpWithEmail({
+      fullName: typeof body.name === "string" ? body.name : "",
+      email: typeof body.email === "string" ? body.email : "",
+      password: typeof body.password === "string" ? body.password : "",
+      confirmPassword:
+        typeof body.confirmPassword === "string"
+          ? body.confirmPassword
+          : typeof body.password === "string"
+            ? body.password
+            : "",
+    });
 
-  const existingUser = await User.findOne({
-    email: body.email,
-  });
+    if (!result.success) {
+      return NextResponse.json(
+        { success: false, error: result.error },
+        { status: 400 },
+      );
+    }
 
-  if (existingUser) {
-    return Response.json(
-      { error: "User already exists" },
-      { status: 400 }
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Account created. Please verify your email before signing in.",
+      },
+      { status: 201 },
+    );
+  } catch (error) {
+    console.error("Sign-up endpoint failed:", error);
+    return NextResponse.json(
+      { success: false, error: "Failed to create account." },
+      { status: 500 },
     );
   }
-
-  const hashedPassword = await bcrypt.hash(
-    body.password,
-    10
-  );
-
-  const user = await User.create({
-    name: body.name,
-    email: body.email,
-    password: hashedPassword,
-  });
-
-  return Response.json(user);
 }
