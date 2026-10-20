@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import InputField from "@/components/forms/InputField";
 import FooterLink from "@/components/forms/FooterLink";
+import OAuthButtons from "@/components/forms/OAuthButtons";
 
 const SignIn = () => {
   const router = useRouter();
@@ -58,6 +59,16 @@ const SignIn = () => {
         <p className="form-subtitle">
           Sign in to access your watchlist and market insights.
         </p>
+
+        <OAuthButtons />
+
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="text-xs uppercase tracking-wider text-gray-500">
+            or continue with email
+          </span>
+          <div className="h-px flex-1 bg-white/10" />
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <InputField

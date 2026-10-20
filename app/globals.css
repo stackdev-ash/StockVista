@@ -235,15 +235,18 @@
     width: 1px;
     height: 100%;
 
-     background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255,255,255,0.12),
-    transparent
-  );
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
   }
   .auth-right-section {
-    @apply w-full lg:w-[48%] h-screen flex items-center justify-center px-8 lg:px-16 bg-transparent;
+    @apply w-full lg:w-[48%] min-h-screen lg:h-screen
+    flex items-center justify-center
+    px-4 py-6 lg:px-8 xl:px-12;
+    background: transparent;
   }
   .auth-blockquote {
     @apply text-sm md:text-xl lg:text-2xl font-medium text-gray-400 mb-1 md:mb-6 lg:mb-8;
@@ -255,9 +258,11 @@
     @apply border-6 border-gray-800 left-0 hidden w-[1024px] h-auto max-w-none lg:block rounded-xl shadow-2xl;
   }
   .auth-form-card {
-    @apply w-full max-w-[460px] rounded-3xl border border-white/15 backdrop-blur-2xl bg-white/[0.03] p-8 shadow-2xl relative overflow-hidden;
+    @apply w-full max-w-115 rounded-3xl
+    border border-white/15 backdrop-blur-2xl
+    bg-white/3 p-5 sm:p-7
+    shadow-2xl relative;
   }
-
   .auth-form-card::before {
     content: "";
     position: absolute;
@@ -271,16 +276,20 @@
     pointer-events: none;
   }
 
+  .auth-form-card:not(.signup-form-card) {
+    @apply max-w-135 p-6 sm:p-8;
+  }
+
   .signup-form-card {
-    @apply max-w-[500px] px-6 py-4 mt-1;
+    @apply max-w-125 px-5 py-4 sm:px-6;
   }
 
   .signup-form {
-    @apply space-y-3;
+    @apply space-y-2;
   }
 
   .signup-form .form-input {
-    @apply h-12 text-sm;
+    @apply h-10 text-sm;
   }
 
   .signup-form .form-label {
@@ -288,8 +297,9 @@
   }
 
   .signup-subtitle {
-    @apply text-gray-400 text-lg mb-7 mt-2;
+    @apply text-gray-400 text-base mb-4 mt-2;
   }
+
   .signup-form-card .form-title {
     @apply text-3xl mb-2;
   }

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import InputField from "@/components/forms/InputField";
 import FooterLink from "@/components/forms/FooterLink";
-import { signIn } from "next-auth/react";
+import OAuthButtons from "@/components/forms/OAuthButtons";
 import { signUpWithEmail } from "../../../lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -44,22 +44,8 @@ const SignUp = () => {
         return;
       }
 
-      const loginResult = await signIn("credentials", {
-        email: payload.email,
-        password: payload.password,
-        redirect: false,
-      });
-
-      if (loginResult?.error) {
-        toast.error("Account created but login failed");
-        router.push("/sign-in");
-        return;
-      }
-
-      toast.success("Account created successfully");
-
-      router.push("/");
-      router.refresh();
+      toast.success("Account created. Check your email to verify it.");
+      router.push("/verify-email?status=sent");
     } catch (e) {
       toast.error("Sign up failed", {
         description:
@@ -73,7 +59,19 @@ const SignUp = () => {
       <div className="auth-form-card signup-form-card z-10">
         <h1 className="form-title">Create Account</h1>
 
-        <p className="signup-subtitle">Start your investing journey with StockVista.</p>
+        <p className="signup-subtitle">
+          Start your investing journey with StockVista.
+        </p>
+
+        <OAuthButtons />
+
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="text-xs uppercase tracking-wider text-gray-500">
+            or sign up with email
+          </span>
+          <div className="h-px flex-1 bg-white/10" />
+        </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
           <InputField
